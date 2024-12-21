@@ -1,0 +1,65 @@
+// Uzvārds: [Jūsu uzvārds]
+
+using System;
+using System.Collections.Generic;
+
+class main
+{
+    static void Main()
+    {
+        try
+        {
+            // Ievada pirmo virkni
+            List<int> firstSequence = ReadSequence();
+            
+            // Ievada otro virkni
+            List<int> secondSequence = ReadSequence();
+            
+            // Atrodam elementus, kas ir pirmajā virknē, bet nav otrajā virknē
+            List<int> uniqueElements = FindUniqueElements(firstSequence, secondSequence);
+            
+            // Izvadam unikālos elementus
+            foreach (int element in uniqueElements)
+            {
+                Console.WriteLine(element);
+            }
+        }
+        catch
+        {
+            Console.WriteLine("error");
+        }
+    }
+
+    static List<int> ReadSequence()
+    {
+        List<int> sequence = new List<int>();
+        while (true)
+        {
+            string input = Console.ReadLine();
+            if (int.TryParse(input, out int number))
+            {
+                if (number == 0)
+                    break;
+                sequence.Add(number);
+            }
+            else
+            {
+                throw new Exception("Invalid input");
+            }
+        }
+        return sequence;
+    }
+
+    static List<int> FindUniqueElements(List<int> firstSequence, List<int> secondSequence)
+    {
+        List<int> uniqueElements = new List<int>();
+        foreach (int element in firstSequence)
+        {
+            if (!secondSequence.Contains(element))
+            {
+                uniqueElements.Add(element);
+            }
+        }
+        return uniqueElements;
+    }
+}
